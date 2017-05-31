@@ -1,9 +1,22 @@
 body {
-  font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-  min-width: 600px;
+  font-family: Roboto, sans-serif;
+  min-width: 330px;
 }
 
-ul {
+#groupList {
+  max-height: 360px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+#footer {
+    float: right;
+    position: relative;
+    bottom: 20px;
+}
+
+
+/*ul {
   list-style-type: none;
   margin: 0px;
   padding: 2px;
@@ -115,4 +128,4 @@ input[type='checkbox'] {
     text-overflow: ellipsis;
     white-space: nowrap;
     width: 400px;
-}
+}*/
