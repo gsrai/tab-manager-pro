@@ -41,6 +41,7 @@
   ],
   "author": "Gagondeep Srai",
   "license": "UNLICENSED",
+  "private": true,
   "bugs": {
     "url": "https://github.com/gsrai/tab-manager-pro/issues"
   },

@@ -5,7 +5,7 @@ var path = require('path');
 module.exports = {
   context: path.join(__dirname, "src"),
   devtool: debug ? "inline-sourcemap" : null,
-  entry: "./client.jsx",
+  entry: "./main.jsx",
   module: {
     loaders: [
       {
@@ -21,7 +21,7 @@ module.exports = {
   },
   output: {
     path: __dirname + "/target/",
-    filename: "client.min.js"
+    filename: "tabManagerPro.min.js"
   },
   plugins: debug ? [] : [
     new webpack.optimize.DedupePlugin(),
