@@ -7,7 +7,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  initStore: () => dispatch(initGroups(text))
+  initStore: () => dispatch(initGroups())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

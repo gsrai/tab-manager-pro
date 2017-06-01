@@ -6,25 +6,29 @@ import { ADD_GROUP, EDIT_GROUP, DELETE_GROUP, LOAD_GROUPS } from '../actions/ind
 export default function groups(state = [], action) {
   switch(action.type) {
     case ADD_GROUP:
-      const { id, name, tabs, editTimestamp, numberOfTabs } = action;
-      const group = {id, name, tabs, editTimestamp, numberOfTabs};
+      const group = {
+        id: action.id, 
+        name: action.name, 
+        tabs: action.tabs, 
+        editTimestamp: action.editTimestamp, 
+        numberOfTabs: action.numberOfTabs
+      };
       return [...state, group];
 
     case EDIT_GROUP:
-      const { id, name, tabs, editTimestamp, numberOfTabs } = action;
-      let group = state.filter((group) => group.id === id)[0];
+      let _group = state.filter((g) => g.id === action.id)[0];
       // check for more than one (collision dupe key)
-      const finalGroup = Object.assign({}, group, {
-        name, 
-        tabs, 
-        editTimestamp, 
-        numberOfTabs
+      const finalGroup = Object.assign({}, _group, {
+        name: action.name, 
+        tabs: action.tabs, 
+        editTimestamp: action.editTimestamp, 
+        numberOfTabs: action.numberOfTabs
       });
-      return [...state.filter((group) => group.id !== id), finalGroup];
+      return [...state.filter((g) => g.id !== id), finalGroup];
     
     case DELETE_GROUP:
-      const id = action.id;
-      const newState = state.filter((group) => group.id !== id);
+      let id = action.id;
+      const newState = state.filter((g) => g.id !== id);
       return newState;
     
     case LOAD_GROUPS:

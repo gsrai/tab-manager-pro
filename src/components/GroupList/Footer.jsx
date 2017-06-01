@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
@@ -16,7 +16,7 @@ export default class Footer extends React.Component {
 
     return (
       <div id="footer">
-        <FloatingActionButton mini={true} style={style} onclick={onClickHandler}>
+        <FloatingActionButton mini={true} style={style} onClick={onClickHandler}>
           <ContentAdd />
         </FloatingActionButton>
       </div>

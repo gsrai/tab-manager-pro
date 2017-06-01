@@ -1,26 +1,12 @@
-import React from 'react';
-import {List, ListItem} from 'material-ui/List';
+import React, { PropTypes } from 'react';
+import { List, ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
-import {grey400} from 'material-ui/styles/colors';
-
-const iconButtonElement = (
-  <IconButton touch={false} tooltip="more" tooltipPosition="bottom-left">
-    <MoreVertIcon color={grey400} />
-  </IconButton>
-);
-
-const rightIconMenu = (
-  <IconMenu iconButtonElement={iconButtonElement}>
-    <MenuItem primaryText={"Open"} />
-    <MenuItem primaryText={"Edit"} />
-    <MenuItem primaryText={"Delete"} />
-  </IconMenu>
-);
+import { grey400 } from 'material-ui/styles/colors';
 
 export default class GroupList extends React.Component {
   constructor(props) {
@@ -28,13 +14,24 @@ export default class GroupList extends React.Component {
   }
 
   createRightIconMenu(openCB, editCB, deleteCB) {
+
+    const iconButtonElement = (
+      <IconButton touch={false} tooltip="more" tooltipPosition="bottom-left">
+        <MoreVertIcon color={grey400} />
+      </IconButton>
+    );
+
     return (
       <IconMenu iconButtonElement={iconButtonElement}>
-        <MenuItem primaryText={"Open"} onclick={openCB} />
-        <MenuItem primaryText={"Edit"} onclick={editCB} />
-        <MenuItem primaryText={"Delete"} onclick={deleteCB} />
+        <MenuItem primaryText={"Open"} onClick={openCB} />
+        <MenuItem primaryText={"Edit"} onClick={editCB} />
+        <MenuItem primaryText={"Delete"} onClick={deleteCB} />
       </IconMenu>
     );
+  }
+
+  createSecondaryText(tabText, dateText) {
+    return (<p>{tabText}<br />{dateText}</p>);
   }
 
   createGroupComponent(group) {
@@ -47,12 +44,12 @@ export default class GroupList extends React.Component {
     return (
       <div>
         <ListItem rightIconButton={
-                    createRightIconMenu(openTabs.bind(group), 
-                                        removeGroup.bind(group.id), 
-                                        editGroup.bind(...group))
+                    createRightIconMenu(openTabs.bind(null, group), 
+                                        removeGroup.bind(null,group.id), 
+                                        editGroup.bind(null,...group))
                   } 
                   primaryText={name}
-                  secondaryText={<p>{tabText}<br />{dateText}</p>}
+                  secondaryText={this.createSecondaryText(tabText, dateText)}
                   secondaryTextLines={2} />
         <Divider />
       </div>
@@ -60,15 +57,15 @@ export default class GroupList extends React.Component {
   }
 
   render() {
-    const groupModel = this.prop.groupModel;
-    const listComponents = groupModel.map((group) => this.createGroupComponent(group));
+    const groupModel = this.props.groupModel;
+    const listComponents = groupModel.map((group) => createGroupComponent(group));
     return (
       <div>
           <Subheader>Groups</Subheader>
           <div id={"groupList"}>
             <List>
               <Divider />
-              {...listComponents}
+              {listComponents}
             </List>
           </div>
       </div>

@@ -1,6 +1,6 @@
-import React from 'react';
-import TablistListScreen from './containers/TablistListContainer';
-import GroupListScreen from './containers/GroupListContainer';
+import React, { PropTypes } from 'react';
+import TabListScreen from '../containers/TabListContainer';
+import GroupListScreen from '../containers/GroupListContainer';
 import { GROUP_LIST_SCREEN, ADD_GROUP_SCREEN, EDIT_GROUP_SCREEN } from '../helpers/screens';
 
 export default class App extends React.Component {
@@ -9,23 +9,26 @@ export default class App extends React.Component {
     props.initStore();
   }
   
-  getCurrentScreenComponent(screen) {
-    switch(screen) {
+  getCurrentScreenComponent(csc) {
+    switch(csc) {
       case GROUP_LIST_SCREEN:
-        return <GroupListScreen />;
+        return (<GroupListScreen />);
 
       case ADD_GROUP_SCREEN:
-        return <TablistListScreen />;
+        return (<TabListScreen />);
 
       case EDIT_GROUP_SCREEN:
-        return <TablistListScreen />;
+        return (<TabListScreen />);
+
+      default:
+        return (<div>Error: unknown screenType: csc</div>);
     }
   }
   render() {
     const currentScreen = this.props.currentScreen;
     return (
       <div>
-        {getCurrentScreenComponent(currentScreen)}
+        {this.getCurrentScreenComponent(currentScreen)}
       </div>
     );
   }
