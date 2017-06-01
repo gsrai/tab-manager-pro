@@ -13,7 +13,7 @@ export default class GroupList extends React.Component {
     super(props);
   }
 
-  createRightIconMenu(openCB, editCB, deleteCB) {
+  createRightIconMenu = (openCB, editCB, deleteCB) => {
 
     const iconButtonElement = (
       <IconButton touch={false} tooltip="more" tooltipPosition="bottom-left">
@@ -30,11 +30,11 @@ export default class GroupList extends React.Component {
     );
   }
 
-  createSecondaryText(tabText, dateText) {
+  createSecondaryText = (tabText, dateText) => {
     return (<p>{tabText}<br />{dateText}</p>);
   }
 
-  createGroupComponent(group) {
+  createGroupComponent = (group) => {
     const { name, tabs, editTimestamp } = group;
     const numberOfTabs = tabs.length;
     const tabText = numberOfTabs > 1 ? numberOfTabs+" tabs" : numberOfTabs+" tab";
@@ -44,7 +44,7 @@ export default class GroupList extends React.Component {
     return (
       <div>
         <ListItem rightIconButton={
-                    createRightIconMenu(openTabs.bind(null, group), 
+                    this.createRightIconMenu(openTabs.bind(null, group), 
                                         removeGroup.bind(null,group.id), 
                                         editGroup.bind(null,...group))
                   } 
@@ -58,7 +58,7 @@ export default class GroupList extends React.Component {
 
   render() {
     const groupModel = this.props.groupModel;
-    const listComponents = groupModel.map((group) => createGroupComponent(group));
+    const listComponents = groupModel.map((group) => this.createGroupComponent(group));
     return (
       <div>
           <Subheader>Groups</Subheader>
@@ -86,6 +86,6 @@ GroupList.propTypes = {
     })),
     editTimestamp: PropTypes.number.isRequired,
     numberOfTabs: PropTypes.number.isRequired,
-    id: PropTypes.number.isRequired
+    id: PropTypes.string.isRequired
   }))
 }

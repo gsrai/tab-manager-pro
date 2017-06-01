@@ -8,7 +8,7 @@ const mapStateToProps = (state, props) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getTabs: () => dispatch(getTabs(text)),
+  getTabs: () => dispatch(getTabs()),
   openTabListScreen: () => dispatch(setScreen(ADD_GROUP_SCREEN)),
   removeGroup: () => { console.log("removing group") },
   editGroup: () => { console.log("editting group") }

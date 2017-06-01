@@ -17,7 +17,7 @@ function hex(buffer) {
   return hexCodes.join("");
 }
 
-export function sha256(str) {
+export default function sha256(str) {
   // We transform the string into an arraybuffer.
   var buffer = new TextEncoder("utf-8").encode(str);
   return crypto.subtle.digest("SHA-256", buffer).then(function(hash) {

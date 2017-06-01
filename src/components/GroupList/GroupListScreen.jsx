@@ -9,7 +9,7 @@ export default class GroupListScreen extends React.Component {
   }
 
   openTabs(group) {
-    chrome.window.create({
+    chrome.windows.create({
       url: group.tabs.map(tab => tab.url),
       focused: true
     });
@@ -48,6 +48,6 @@ GroupListScreen.propTypes = {
     })),
     editTimestamp: PropTypes.number.isRequired,
     numberOfTabs: PropTypes.number.isRequired,
-    id: PropTypes.number.isRequired
+    id: PropTypes.string.isRequired
   }))
 }
