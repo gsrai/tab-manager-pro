@@ -47,6 +47,7 @@ GroupListScreen.propTypes = {
       id: PropTypes.number.isRequired
     })),
     editTimestamp: PropTypes.number.isRequired,
+    numberOfTabs: PropTypes.number.isRequired,
     id: PropTypes.number.isRequired
   }))
 }

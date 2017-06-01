@@ -53,9 +53,39 @@ export function loadGroups(groups) {
   };
 }
 
+function doesGroupExist(name, tabGroups) {
+  var numberOfGroups = tabGroups.length;
+
+  for (var i = 0; i < numberOfGroups; i++) {
+    if (tabGroups[i].name === name) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 export function addGroup(name, tabs, editTimestamp, numberOfTabs) {
   return (dispatch) => {
-    sha256(name).then((id) => dispatch(createGroup(id, name, tabs, editTimestamp, numberOfTabs)));
+    sha256(name).then((id) => {
+      const group = {id, name, tabs, editTimestamp, numberOfTabs};
+      readData(function(data) {
+        let tabGroups = data.tabGroups;
+
+        if (!doesGroupExist(group.name, tabGroups)) {
+          tabGroups.push(group);
+        } else {
+          console.warn('must select at least one tab for grouping');
+        }
+        console.info('writing: ', tabGroups);
+        writeData({tabGroups: tabGroups});
+      });
+
+      chrome.storage.onChanged.addListener(() => {
+        // should i be doing it like this?
+        dispatch(createGroup(id, name, tabs, editTimestamp, numberOfTabs)); 
+      });
+    });
   }
 }
 
@@ -95,10 +125,11 @@ export function loadTabs(tabs) {
   };
 }
 
-const tabModelMapper = (tab) => {
+const tabModelMapper = (tab, i) => {
   return {
     url: tab.url, 
-    title: tab.title
+    title: tab.title,
+    id: i
   };
 }
 

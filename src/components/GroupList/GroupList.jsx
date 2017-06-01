@@ -42,10 +42,15 @@ export default class GroupList extends React.Component {
     const numberOfTabs = tabs.length;
     const tabText = numberOfTabs > 1 ? numberOfTabs+" tabs" : numberOfTabs+" tab";
     const dateText = (new Date(editTimestamp)).toLocaleDateString();
+    let { openTabs, removeGroup, editGroup } = this.props;
 
     return (
       <div>
-        <ListItem rightIconButton={createRightIconMenu(group)} 
+        <ListItem rightIconButton={
+                    createRightIconMenu(openTabs.bind(group), 
+                                        removeGroup.bind(group.id), 
+                                        editGroup.bind(...group))
+                  } 
                   primaryText={name}
                   secondaryText={<p>{tabText}<br />{dateText}</p>}
                   secondaryTextLines={2} />
@@ -83,6 +88,7 @@ GroupList.propTypes = {
       id: PropTypes.number.isRequired
     })),
     editTimestamp: PropTypes.number.isRequired,
+    numberOfTabs: PropTypes.number.isRequired,
     id: PropTypes.number.isRequired
   }))
 }
