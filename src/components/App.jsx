@@ -1,20 +1,37 @@
 import React from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
-// import Header from './Header.jsx'
-// import Footer from './Footer.jsx'
-// import GroupList from './GroupList.jsx'
-import AdditScreen from './Addit/AdditScreen.jsx'
+import TablistListScreen from './containers/TablistListContainer';
+import GroupListScreen from './containers/GroupListContainer';
+import { GROUP_LIST_SCREEN, ADD_GROUP_SCREEN, EDIT_GROUP_SCREEN } from '../helpers/screens';
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    props.initStore();
+  }
+  
+  getCurrentScreenComponent(screen) {
+    switch(screen) {
+      case GROUP_LIST_SCREEN:
+        return <GroupListScreen />;
+
+      case ADD_GROUP_SCREEN:
+        return <TablistListScreen />;
+
+      case EDIT_GROUP_SCREEN:
+        return <TablistListScreen />;
+    }
+  }
   render() {
+    const currentScreen = this.props.currentScreen;
     return (
       <div>
-        <AdditScreen />
+        {getCurrentScreenComponent(currentScreen)}
       </div>
     );
   }
 }
 
-// <Header />
-//         <TabList />
-//         <Footer />
+App.propTypes = {
+  initStore: PropTypes.func.isRequired,
+  currentScreen: PropTypes.string.isRequired
+}

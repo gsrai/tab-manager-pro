@@ -8,12 +8,23 @@ const style = {
 
 export default class Footer extends React.Component {
   render() {
+    const { openTabListScreen, getTabs } = this.props;
+    const onClickHandler = () => {
+      openTabListScreen();
+      getTabs();
+    };
+
     return (
       <div id="footer">
-        <FloatingActionButton mini={true} style={style}>
+        <FloatingActionButton mini={true} style={style} onclick={onClickHandler}>
           <ContentAdd />
         </FloatingActionButton>
       </div>
     );
   }
+}
+
+Footer.propTypes = {
+  openTabListScreen: PropTypes.func.isRequired,
+  getTabs:PropTypes.func.isRequired
 }
