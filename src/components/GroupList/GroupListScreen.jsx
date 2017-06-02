@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Header from './Header.jsx'
-import Footer from './Footer.jsx'
-import GroupList from './GroupList.jsx'
+import Header from './Header.jsx';
+import Footer from './Footer.jsx';
+import GroupList from './GroupList.jsx';
 
 export default class GroupListScreen extends React.Component {
   constructor(props) {
@@ -17,18 +17,18 @@ export default class GroupListScreen extends React.Component {
   }
 
   render() {
-    const { openTabListScreen, 
-            getTabs, 
-            groupModel, 
-            editGroup, 
+    const { openTabListScreen,
+            getTabs,
+            groupModel,
+            editGroup,
             removeGroup } = this.props;
     return (
       <div>
         <Header />
-        <GroupList groupModel={groupModel} 
-                   editGroup={editGroup} 
+        <GroupList groupModel={groupModel}
+                   editGroup={editGroup}
                    removeGroup={removeGroup} openTabs={this.openTabs} />
-                   
+
         <Footer openTabListScreen={openTabListScreen} getTabs={getTabs} />
       </div>
     );
@@ -51,4 +51,4 @@ GroupListScreen.propTypes = {
     numberOfTabs: PropTypes.number.isRequired,
     id: PropTypes.string.isRequired
   }))
-}
+};

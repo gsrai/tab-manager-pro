@@ -9,7 +9,7 @@ export default class App extends React.Component {
     super(props);
     props.initStore();
   }
-  
+
   getCurrentScreenComponent(csc) {
     switch(csc) {
       case GROUP_LIST_SCREEN:
@@ -38,4 +38,4 @@ export default class App extends React.Component {
 App.propTypes = {
   initStore: PropTypes.func.isRequired,
   currentScreen: PropTypes.string.isRequired
-}
+};

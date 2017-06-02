@@ -4,7 +4,7 @@ import AdditScreen from '../components/Addit/AdditScreen.jsx';
 import { GROUP_LIST_SCREEN } from '../helpers/screens';
 
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = (state) => ({
   tabModel: state.tabs
 });
 

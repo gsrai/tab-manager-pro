@@ -7,6 +7,9 @@ module.exports = {
   devtool: null, //'source-map',
   entry: "./main.jsx",
   module: {
+    preLoaders: [
+      { test: /\.jsx?$/, loader: 'eslint', exclude: /(node_modules|bower_components)/ }
+    ],
     loaders: [
       {
         test: /\.jsx?$/,
@@ -14,10 +17,20 @@ module.exports = {
         loader: 'babel-loader',
         query: {
           presets: ['react', 'es2015', 'stage-0', 'stage-1'],
-          plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy'],
+          plugins: [
+            'react-html-attrs',
+            'add-module-exports',
+            'transform-class-properties', 
+            'transform-decorators-legacy',
+            'transform-async-to-generator'
+          ],
         }
       }
     ]
+  },
+  eslint: {
+    failOnWarning: false,
+    failOnError: true
   },
   output: {
     path: __dirname + "/target/",

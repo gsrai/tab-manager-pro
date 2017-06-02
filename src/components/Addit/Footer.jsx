@@ -7,8 +7,8 @@ export default class Footer extends React.Component {
   render() {
     return (
       <div id="groupName">
-        <TextField hintText="Group Name" 
-                   fullWidth={true} 
+        <TextField hintText="Group Name"
+                   fullWidth={true}
                    onChange={this.props.onChangeCB} />
       </div>
     );
@@ -17,4 +17,4 @@ export default class Footer extends React.Component {
 
 Footer.propTypes = {
   onChangeCB: PropTypes.func.isRequired
-}
+};

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { initGroups } from '../redux/actions'
+import { initGroups } from '../redux/actions';
 import App from '../components/App.jsx';
 
 const mapStateToProps = state => ({

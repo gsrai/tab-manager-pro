@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Header from './Header.jsx'
-import Footer from './Footer.jsx'
-import TabList from './TabList.jsx'
+import Header from './Header.jsx';
+import Footer from './Footer.jsx';
+import TabList from './TabList.jsx';
 
 export default class AdditScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.name = "";
+    this.name = '';
     this.tabs = [];
   }
 
   componentWillUnmount() {
-    this.name = "";
+    this.name = '';
     this.tabs = [];
   }
 
@@ -31,13 +31,13 @@ export default class AdditScreen extends React.Component {
   }
 
   onSave = () => {
-    let tabs = this.tabs;
-    let name = this.name;
-    let numberOfTabs = tabs.length;
-    let tsp = new Date().getTime();
+    const tabs = this.tabs;
+    const name = this.name;
+    const numberOfTabs = tabs.length;
+    const tsp = new Date().getTime();
 
     if (numberOfTabs < 1 || !name || name.trim() === '') {
-      console.log('name is empty or no tabs selected.');// better feedback and split this
+      // name is empty or no tabs selected. better feedback and split this
     } else {
       this.props.onSave(name, tabs, tsp, numberOfTabs);
     }
@@ -48,8 +48,8 @@ export default class AdditScreen extends React.Component {
     return (
       <div>
         <Header onSave={this.onSave} onCancel={this.props.onCancel}/>
-        <TabList model={this.props.tabModel} 
-                 onSelectTab={this.onSelectTab} 
+        <TabList model={this.props.tabModel}
+                 onSelectTab={this.onSelectTab}
                  onUnselectTab={this.onUnselectTab} />
         <Footer onChangeCB={this.onNameChange} />
       </div>
@@ -65,4 +65,4 @@ AdditScreen.propTypes = {
     title: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired
   }))
-}
+};

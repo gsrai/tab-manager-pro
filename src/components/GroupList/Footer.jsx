@@ -28,4 +28,4 @@ export default class Footer extends React.Component {
 Footer.propTypes = {
   openTabListScreen: PropTypes.func.isRequired,
   getTabs:PropTypes.func.isRequired
-}
+};

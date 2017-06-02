@@ -9,7 +9,7 @@ export default class Header extends React.Component {
   render() {
     const { onSave, onCancel } = this.props;
     return (
-      <AppBar title="Tab Manager Pro" 
+      <AppBar title="Tab Manager Pro"
               iconElementLeft={<IconButton onClick={onCancel} ><NavigationClose /></IconButton>}
               iconElementRight={<FlatButton label="Save" onClick={onSave} />} />
     );
@@ -19,4 +19,4 @@ export default class Header extends React.Component {
 Header.propTypes = {
   onSave: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired
-}
+};

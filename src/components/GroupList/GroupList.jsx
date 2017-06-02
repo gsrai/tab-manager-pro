@@ -17,16 +17,16 @@ export default class GroupList extends React.Component {
   createRightIconMenu = (openCB, deleteCB, editCB) => {
 
     const iconButtonElement = (
-      <IconButton touch={false} tooltip="more" tooltipPosition="bottom-left">
+      <IconButton touch={false} tooltip='more' tooltipPosition='bottom-left'>
         <MoreVertIcon color={grey400} />
       </IconButton>
     );
 
     return (
       <IconMenu iconButtonElement={iconButtonElement}>
-        <MenuItem primaryText={"Open"} onClick={openCB} />
-        <MenuItem primaryText={"Edit"} onClick={editCB} />
-        <MenuItem primaryText={"Delete"} onClick={deleteCB} />
+        <MenuItem primaryText={'Open'} onClick={openCB} />
+        <MenuItem primaryText={'Edit'} onClick={editCB} />
+        <MenuItem primaryText={'Delete'} onClick={deleteCB} />
       </IconMenu>
     );
   }
@@ -37,26 +37,26 @@ export default class GroupList extends React.Component {
 
   getLang() {
     if (navigator.languages != undefined) {
-      return navigator.languages[0]; 
-    } else {
-      return navigator.language;
+      return navigator.languages[0];
     }
+
+    return navigator.language;
   }
 
   createGroupComponent = (group, i) => {
     const { name, tabs, editTimestamp } = group;
     const numberOfTabs = tabs.length;
-    const tabText = numberOfTabs > 1 ? numberOfTabs+" tabs" : numberOfTabs+" tab";
+    const tabText = numberOfTabs > 1 ? numberOfTabs+' tabs' : numberOfTabs+' tab';
     const dateText = new Date(editTimestamp).toLocaleDateString(this.getLang());
-    let { openTabs, removeGroup, editGroup } = this.props;
+    const { openTabs, removeGroup, editGroup } = this.props;
 
     return (
       <div key={i}>
         <ListItem rightIconButton={
-                    this.createRightIconMenu(openTabs.bind(null, group), 
-                                        removeGroup.bind(null,group.id), 
+                    this.createRightIconMenu(openTabs.bind(null, group),
+                                        removeGroup.bind(null,group.id),
                                         editGroup.bind(null,...group))
-                  } 
+                  }
                   primaryText={name}
                   secondaryText={this.createSecondaryText(tabText, dateText)}
                   secondaryTextLines={2} />
@@ -73,7 +73,7 @@ export default class GroupList extends React.Component {
     return (
       <div>
           <Subheader>Groups</Subheader>
-          <div id={"groupList"}>
+          <div id={'groupList'}>
             <List>
               <Divider />
               {listComponents}
@@ -99,4 +99,4 @@ GroupList.propTypes = {
     numberOfTabs: PropTypes.number.isRequired,
     id: PropTypes.string.isRequired
   }))
-}
+};

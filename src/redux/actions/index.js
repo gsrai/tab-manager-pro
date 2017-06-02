@@ -1,49 +1,44 @@
-import sha256 from "../../helpers/crypto";
+import sha256 from '../../helpers/crypto';
 
-export const ADD_GROUP = "ADD_GROUP";
-export const EDIT_GROUP = "EDIT_GROUP";
-export const DELETE_GROUP = "DELETE_GROUP";
-export const LOAD_GROUPS = "LOAD_GROUPS";
-export const LOAD_TABS = "LOAD_TABS";
-export const SET_SCREEN = "SET_SCREEN";
+export const ADD_GROUP = 'ADD_GROUP';
+export const EDIT_GROUP = 'EDIT_GROUP';
+export const DELETE_GROUP = 'DELETE_GROUP';
+export const LOAD_GROUPS = 'LOAD_GROUPS';
+export const LOAD_TABS = 'LOAD_TABS';
+export const SET_SCREEN = 'SET_SCREEN';
 
 // move to helper?
 function readData(callback) {
-  chrome.storage.sync.get('tabManager', function(obj) {
-    console.info('tabManager object: ', obj);
+  chrome.storage.sync.get('tabManager', function (obj) {
     callback(obj.tabManager);
-  })
+  });
 }
 
 function writeData(data) {
-  var obj = {};
+  const obj = {};
   obj['tabManager'] = data;
 
   if (!data) {
-    console.warn('data is null, will not save');
     return;
   }
 
-  chrome.storage.sync.set(obj, function() {
-    console.info('tabGroups saved : ', obj);
-  });
+  chrome.storage.sync.set(obj, function () {});
 }
 
 export function initGroups() {
   return (dispatch) => {
-    readData(function(obj) {
+    readData(function (obj) {
       let groups = null;
       if (!obj || !obj.tabGroups) {
-        console.info('initializing data as tabGroups are empty');
         groups = [];
-        writeData({tabGroups: []}); 
+        writeData({tabGroups: []});
       } else {
         groups = obj.tabGroups;
       }
 
       dispatch(loadGroups(groups));
     });
-  }
+  };
 }
 
 export function loadGroups(groups) {
@@ -54,9 +49,9 @@ export function loadGroups(groups) {
 }
 
 function doesGroupExist(name, tabGroups) {
-  var numberOfGroups = tabGroups.length;
+  const numberOfGroups = tabGroups.length;
 
-  for (var i = 0; i < numberOfGroups; i++) {
+  for (let i = 0; i < numberOfGroups; i++) {
     if (tabGroups[i].name === name) {
       return true;
     }
@@ -69,24 +64,24 @@ export function addGroup(name, tabs, editTimestamp, numberOfTabs) {
   return (dispatch) => {
     sha256(name).then((id) => {
       const group = {id, name, tabs, editTimestamp, numberOfTabs};
-      readData(function(data) {
-        let tabGroups = data.tabGroups;
+      readData(function (data) {
+        const tabGroups = data.tabGroups;
 
         if (!doesGroupExist(group.name, tabGroups)) {
           tabGroups.push(group);
         } else {
-          console.warn('group already exists');
+          // group already exists throw error or feedback
         }
-        console.info('writing: ', tabGroups);
-        writeData({tabGroups: tabGroups});
+
+        writeData({ tabGroups });
       });
 
       chrome.storage.onChanged.addListener(() => {
         // should i be doing it like this?
-        dispatch(createGroup(id, name, tabs, editTimestamp, numberOfTabs)); 
+        dispatch(createGroup(id, name, tabs, editTimestamp, numberOfTabs));
       });
     });
-  }
+  };
 }
 
 export function createGroup(id, name, tabs, editTimestamp, numberOfTabs) {
@@ -127,19 +122,19 @@ export function loadTabs(tabs) {
 
 const tabModelMapper = (tab, i) => {
   return {
-    url: tab.url, 
+    url: tab.url,
     title: tab.title,
     id: i
   };
-}
+};
 
 export function getTabs() {
   return (dispatch) => {
     chrome.tabs.query({}, (tabs) => {
-        let tabModel = tabs.map(tabModelMapper);
-        dispatch(loadTabs(tabModel));
-      });
-  }
+      const tabModel = tabs.map(tabModelMapper);
+      dispatch(loadTabs(tabModel));
+    });
+  };
 }
 
 export function setScreen(screen) {

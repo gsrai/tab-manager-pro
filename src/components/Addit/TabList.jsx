@@ -31,7 +31,7 @@ export default class TabList extends React.Component {
   createTabComponent = (tab) => {
     return(
       <div key={tab.id} >
-        <ListItem secondaryText={tab.title} 
+        <ListItem secondaryText={tab.title}
                   secondaryTextLines={1}
                   leftCheckbox={this.createCheckbox(tab.id)} />
         <Divider />
@@ -65,4 +65,4 @@ TabList.propTypes = {
     title: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired
   }))
-}
+};
