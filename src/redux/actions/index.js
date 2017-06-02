@@ -75,7 +75,7 @@ export function addGroup(name, tabs, editTimestamp, numberOfTabs) {
         if (!doesGroupExist(group.name, tabGroups)) {
           tabGroups.push(group);
         } else {
-          console.warn('must select at least one tab for grouping');
+          console.warn('group already exists');
         }
         console.info('writing: ', tabGroups);
         writeData({tabGroups: tabGroups});

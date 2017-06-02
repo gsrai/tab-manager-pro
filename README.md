@@ -8,3 +8,4 @@ Chrome extension for managing tabs into groups for deferred consumption
 - implement work with redux (get tabs into the store, save and load groups correctly)
 - wire up addit
 - add a min height, and max height to body, fix + btn 
+- reverse group list so newest first

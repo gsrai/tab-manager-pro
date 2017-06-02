@@ -6,37 +6,32 @@ import TabList from './TabList.jsx'
 export default class AdditScreen extends React.Component {
   constructor(props) {
     super(props);
+    this.name = "";
+    this.tabs = [];
   }
 
-  componentDidMount() {
-    this.setState({
-      name: "",
-      tabs: []
-    });
+  componentWillUnmount() {
+    this.name = "";
+    this.tabs = [];
   }
 
   onNameChange = (e, value) => {
-    this.setState({
-      name: String(value)
-    });
+    this.name = String(value);
   }
 
   onUnselectTab = (tab) => {
-    const tabs = this.state.tabs;
+    const tabs = this.tabs;
     const _tabs = tabs.filter((t) => t.id !== tab.id);
-    this.setState({
-      tabs: [..._tabs]
-    });
+    this.tabs = [..._tabs];
   }
 
   onSelectTab = (tab) => {
-    this.setState({
-      tabs: [...this.state.tabs, tab]
-    });
+    this.tabs = [...this.tabs, tab];
   }
 
   onSave = () => {
-    let { name, tabs } = this.state;
+    let tabs = this.tabs;
+    let name = this.name;
     let numberOfTabs = tabs.length;
     let tsp = new Date().getTime();
 

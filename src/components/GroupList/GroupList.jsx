@@ -13,7 +13,7 @@ export default class GroupList extends React.Component {
     super(props);
   }
 
-  createRightIconMenu = (openCB, editCB, deleteCB) => {
+  createRightIconMenu = (openCB, deleteCB, editCB) => {
 
     const iconButtonElement = (
       <IconButton touch={false} tooltip="more" tooltipPosition="bottom-left">
@@ -34,15 +34,15 @@ export default class GroupList extends React.Component {
     return (<p>{tabText}<br />{dateText}</p>);
   }
 
-  createGroupComponent = (group) => {
+  createGroupComponent = (group, i) => {
     const { name, tabs, editTimestamp } = group;
     const numberOfTabs = tabs.length;
     const tabText = numberOfTabs > 1 ? numberOfTabs+" tabs" : numberOfTabs+" tab";
-    const dateText = (new Date(editTimestamp)).toLocaleDateString();
+    const dateText = new Date(editTimestamp).toLocaleDateString('en-GB');
     let { openTabs, removeGroup, editGroup } = this.props;
 
     return (
-      <div>
+      <div key={i}>
         <ListItem rightIconButton={
                     this.createRightIconMenu(openTabs.bind(null, group), 
                                         removeGroup.bind(null,group.id), 
@@ -58,7 +58,9 @@ export default class GroupList extends React.Component {
 
   render() {
     const groupModel = this.props.groupModel;
-    const listComponents = groupModel.map((group) => this.createGroupComponent(group));
+    let listComponents = groupModel.map((group, i) => this.createGroupComponent(group, i));
+    listComponents = listComponents.reverse();
+
     return (
       <div>
           <Subheader>Groups</Subheader>

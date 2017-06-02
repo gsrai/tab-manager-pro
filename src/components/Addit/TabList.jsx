@@ -29,7 +29,7 @@ export default class TabList extends React.Component {
 
   createTabComponent = (tab) => {
     return(
-      <div id={'tabItem'+tab.id} >
+      <div key={tab.id} >
         <ListItem secondaryText={tab.title} 
                   secondaryTextLines={1}
                   leftCheckbox={this.createCheckbox(tab.id)} />
