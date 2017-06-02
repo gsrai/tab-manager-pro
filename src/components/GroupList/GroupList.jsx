@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { List, ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
@@ -34,11 +35,19 @@ export default class GroupList extends React.Component {
     return (<p>{tabText}<br />{dateText}</p>);
   }
 
+  getLang() {
+    if (navigator.languages != undefined) {
+      return navigator.languages[0]; 
+    } else {
+      return navigator.language;
+    }
+  }
+
   createGroupComponent = (group, i) => {
     const { name, tabs, editTimestamp } = group;
     const numberOfTabs = tabs.length;
     const tabText = numberOfTabs > 1 ? numberOfTabs+" tabs" : numberOfTabs+" tab";
-    const dateText = new Date(editTimestamp).toLocaleDateString('en-GB');
+    const dateText = new Date(editTimestamp).toLocaleDateString(this.getLang());
     let { openTabs, removeGroup, editGroup } = this.props;
 
     return (

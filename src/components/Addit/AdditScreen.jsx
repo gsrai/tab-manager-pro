@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Header from './Header.jsx'
 import Footer from './Footer.jsx'
 import TabList from './TabList.jsx'
