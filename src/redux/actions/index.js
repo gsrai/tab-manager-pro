@@ -76,11 +76,31 @@ export function addGroup(name, tabs, editTimestamp, numberOfTabs) {
         writeData({ tabGroups });
       });
 
-      chrome.storage.onChanged.addListener(() => {
-        // should i be doing it like this?
+      const addCallback = () => {
         dispatch(createGroup(id, name, tabs, editTimestamp, numberOfTabs));
-      });
+        chrome.storage.onChanged.removeListener(addCallback);
+      };
+
+      chrome.storage.onChanged.addListener(addCallback);
     });
+  };
+}
+
+export function removeGroup(id) {
+  return (dispatch) => {
+    readData(function (data) {
+      const _tabGroups = data.tabGroups;
+
+      const tabGroups = _tabGroups.filter((g) => g.id !== id);
+      writeData({ tabGroups });
+    });
+
+    const deleteCallback = () => {
+      dispatch(deleteGroup(id));
+      chrome.storage.onChanged.removeListener(deleteCallback);
+    };
+
+    chrome.storage.onChanged.addListener(deleteCallback);
   };
 }
 
@@ -120,11 +140,11 @@ export function loadTabs(tabs) {
   };
 }
 
-const tabModelMapper = (tab, i) => {
+const tabModelMapper = (tab) => {
   return {
     url: tab.url,
     title: tab.title,
-    id: i
+    id: tab.id
   };
 };
 

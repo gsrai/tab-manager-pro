@@ -11,8 +11,8 @@ export default class Footer extends React.Component {
   render() {
     const { openTabListScreen, getTabs } = this.props;
     const onClickHandler = () => {
-      openTabListScreen();
       getTabs();
+      openTabListScreen();
     };
 
     return (

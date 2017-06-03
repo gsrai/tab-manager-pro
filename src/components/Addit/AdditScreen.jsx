@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
-import TabList from './TabList.jsx';
+import TabListContainer from '../../containers/TabListContainer';
 
 export default class AdditScreen extends React.Component {
   constructor(props) {
@@ -48,9 +48,7 @@ export default class AdditScreen extends React.Component {
     return (
       <div>
         <Header onSave={this.onSave} onCancel={this.props.onCancel}/>
-        <TabList model={this.props.tabModel}
-                 onSelectTab={this.onSelectTab}
-                 onUnselectTab={this.onUnselectTab} />
+        <TabListContainer onSelectTab={this.onSelectTab} onUnselectTab={this.onUnselectTab} />
         <Footer onChangeCB={this.onNameChange} />
       </div>
     );
@@ -59,10 +57,5 @@ export default class AdditScreen extends React.Component {
 
 AdditScreen.propTypes = {
   onSave: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired,
-  tabModel: PropTypes.arrayOf(PropTypes.shape({
-    url: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired
-  }))
+  onCancel: PropTypes.func.isRequired
 };
