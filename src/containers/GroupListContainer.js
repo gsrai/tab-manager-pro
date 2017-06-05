@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
-import { getTabs, setScreen, removeGroup } from '../redux/actions';
-import { ADD_GROUP_SCREEN } from '../helpers/screens';
+import { getTabs, removeGroup } from '../redux/actions';
 import GroupListScreen from '../components/GroupList/GroupListScreen.jsx';
 
 const mapStateToProps = (state) => ({
@@ -9,7 +8,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => ({
   getTabs: () => dispatch(getTabs()),
-  openTabListScreen: () => dispatch(setScreen(ADD_GROUP_SCREEN)),
   removeGroup: (id) =>  dispatch(removeGroup(id)),
   editGroup: () => { return; }
 });

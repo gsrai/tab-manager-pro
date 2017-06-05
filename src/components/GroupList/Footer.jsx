@@ -9,10 +9,9 @@ const style = {
 
 export default class Footer extends React.Component {
   render() {
-    const { openTabListScreen, getTabs } = this.props;
+    const {getTabs } = this.props;
     const onClickHandler = () => {
       getTabs();
-      openTabListScreen();
     };
 
     return (
@@ -26,6 +25,5 @@ export default class Footer extends React.Component {
 }
 
 Footer.propTypes = {
-  openTabListScreen: PropTypes.func.isRequired,
   getTabs:PropTypes.func.isRequired
 };

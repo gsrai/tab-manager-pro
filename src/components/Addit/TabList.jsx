@@ -28,9 +28,9 @@ export default class TabList extends React.Component {
     );
   }
 
-  createTabComponent = (tab) => {
+  createTabComponent = (tab, i) => {
     return(
-      <div key={tab.id} >
+      <div key={i} >
         <ListItem secondaryText={tab.title}
                   secondaryTextLines={1}
                   leftCheckbox={this.createCheckbox(tab.id)} />
@@ -41,7 +41,7 @@ export default class TabList extends React.Component {
 
   render() {
     const model = this.props.model;
-    const listComponents = model.map((tab) => this.createTabComponent(tab));
+    const listComponents = model.map((tab, i) => this.createTabComponent(tab, i));
 
     return (
       <div>

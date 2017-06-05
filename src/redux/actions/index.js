@@ -1,4 +1,5 @@
 import sha256 from '../../helpers/crypto';
+import { ADD_GROUP_SCREEN } from '../../helpers/screens';
 
 export const ADD_GROUP = 'ADD_GROUP';
 export const EDIT_GROUP = 'EDIT_GROUP';
@@ -150,6 +151,7 @@ const tabModelMapper = (tab) => {
 
 export function getTabs() {
   return (dispatch) => {
+    dispatch(setScreen(ADD_GROUP_SCREEN));
     chrome.tabs.query({}, (tabs) => {
       const tabModel = tabs.map(tabModelMapper);
       dispatch(loadTabs(tabModel));

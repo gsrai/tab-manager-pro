@@ -17,8 +17,7 @@ export default class GroupListScreen extends React.Component {
   }
 
   render() {
-    const { openTabListScreen,
-            getTabs,
+    const { getTabs,
             groupModel,
             editGroup,
             removeGroup } = this.props;
@@ -29,14 +28,13 @@ export default class GroupListScreen extends React.Component {
                    editGroup={editGroup}
                    removeGroup={removeGroup} openTabs={this.openTabs} />
 
-        <Footer openTabListScreen={openTabListScreen} getTabs={getTabs} />
+        <Footer getTabs={getTabs} />
       </div>
     );
   }
 }
 
 GroupListScreen.propTypes = {
-  openTabListScreen: PropTypes.func.isRequired,
   getTabs: PropTypes.func.isRequired,
   removeGroup: PropTypes.func.isRequired,
   editGroup: PropTypes.func.isRequired,

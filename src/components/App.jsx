@@ -8,20 +8,18 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     props.initStore();
-    this.groupListComponent = (<GroupListScreen />);
-    this.tabListComponent = (<AdditScreen />);
   }
 
   getCurrentScreenComponent(csc) {
     switch(csc) {
       case GROUP_LIST_SCREEN:
-        return this.groupListComponent;
+        return (<GroupListScreen />);
 
       case ADD_GROUP_SCREEN:
-        return this.tabListComponent;
+        return (<AdditScreen />);
 
       case EDIT_GROUP_SCREEN:
-        return this.tabListComponent;
+        return (<AdditScreen />);
 
       default:
         return (<div>Error: unknown screenType: csc</div>);
