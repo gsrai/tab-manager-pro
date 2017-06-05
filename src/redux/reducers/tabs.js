@@ -1,4 +1,4 @@
-import { LOAD_TABS } from '../actions/index';
+import { LOAD_TABS } from '../actions/actionTypes';
 
 export default function tabs(state = [], action) {
   switch(action.type) {

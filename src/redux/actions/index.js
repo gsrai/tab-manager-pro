@@ -1,12 +1,10 @@
 import sha256 from '../../helpers/crypto';
 import { ADD_GROUP_SCREEN } from '../../helpers/screens';
-
-export const ADD_GROUP = 'ADD_GROUP';
-export const EDIT_GROUP = 'EDIT_GROUP';
-export const DELETE_GROUP = 'DELETE_GROUP';
-export const LOAD_GROUPS = 'LOAD_GROUPS';
-export const LOAD_TABS = 'LOAD_TABS';
-export const SET_SCREEN = 'SET_SCREEN';
+import {
+  ADD_GROUP, EDIT_GROUP,
+  DELETE_GROUP, LOAD_GROUPS,
+  LOAD_TABS, SET_SCREEN
+} from './actionTypes';
 
 // move to helper?
 function readData(callback) {

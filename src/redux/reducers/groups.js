@@ -1,4 +1,4 @@
-import { ADD_GROUP, EDIT_GROUP, DELETE_GROUP, LOAD_GROUPS } from '../actions/index';
+import { ADD_GROUP, EDIT_GROUP, DELETE_GROUP, LOAD_GROUPS } from '../actions/actionTypes';
 
 export default function groups(state = [], action) {
   switch(action.type) {
