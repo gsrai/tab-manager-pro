@@ -9,9 +9,11 @@ export default class Header extends React.Component {
   render() {
     const { onSave, onCancel } = this.props;
     return (
-      <AppBar title="Tab Manager Pro"
-              iconElementLeft={<IconButton onClick={onCancel} ><NavigationClose /></IconButton>}
-              iconElementRight={<FlatButton label="Save" onClick={onSave} />} />
+      <div className="header">
+        <AppBar title="Tab Manager Pro"
+                iconElementLeft={<IconButton id="additCloseBtn" onClick={onCancel} ><NavigationClose /></IconButton>}
+                iconElementRight={<FlatButton label="Save" onClick={onSave} id="additSaveBtn" />} />
+      </div>
     );
   }
 }
