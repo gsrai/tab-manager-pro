@@ -24,9 +24,9 @@ export default class GroupList extends React.Component {
 
     return (
       <IconMenu iconButtonElement={iconButtonElement}>
-        <MenuItem primaryText={'Open'} onClick={openCB} />
-        <MenuItem primaryText={'Edit'} onClick={editCB} />
-        <MenuItem primaryText={'Delete'} onClick={deleteCB} />
+        <MenuItem id="openTabsBtn" primaryText={'Open'} onClick={openCB} />
+        <MenuItem id="editGroupBtn" primaryText={'Edit'} onClick={editCB} />
+        <MenuItem id="removeGroupBtn" primaryText={'Delete'} onClick={deleteCB} />
       </IconMenu>
     );
   }
