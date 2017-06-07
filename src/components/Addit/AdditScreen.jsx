@@ -5,8 +5,6 @@ import Footer from './Footer.jsx';
 import TabListContainer from '../../containers/TabListContainer';
 import Snackbar from 'material-ui/Snackbar';
 
-const errorMsg = 'Name is empty/duplicate or no Tabs selected';
-
 export default class AdditScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -55,7 +53,17 @@ export default class AdditScreen extends React.Component {
     const numberOfTabs = tabs.length;
     const tsp = new Date().getTime();
 
-    if (numberOfTabs < 1 || !name || name.trim() === '' || this.doesGroupExist(name)) {
+    let errorMsg = '';
+
+    if (numberOfTabs < 1 ) {
+      errorMsg = 'Please select at least one tab';
+    } else if (!name || name.trim() === '') {
+      errorMsg = 'Please enter a group name';
+    } else if (this.doesGroupExist(name)) {
+      errorMsg = 'Group name is already taken';
+    }
+
+    if (errorMsg) {
       this.setState({
         open: true,
         message: errorMsg
@@ -64,7 +72,6 @@ export default class AdditScreen extends React.Component {
       this.props.onSave(name, tabs, tsp, numberOfTabs);
     }
   }
-
 
   render() {
     return (
