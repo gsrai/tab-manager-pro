@@ -3,12 +3,26 @@ import PropTypes from 'prop-types';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import TabListContainer from '../../containers/TabListContainer';
+import Snackbar from 'material-ui/Snackbar';
+
+const errorMsg = 'Name is empty or no Tabs selected';
 
 export default class AdditScreen extends React.Component {
   constructor(props) {
     super(props);
     this.name = '';
     this.tabs = [];
+    this.state = {
+      open: false,
+      message: ''
+    };
+  }
+
+  onSnackBarClose = () => {
+    this.setState({
+      open: false,
+      message: ''
+    });
   }
 
   componentWillUnmount() {
@@ -37,7 +51,10 @@ export default class AdditScreen extends React.Component {
     const tsp = new Date().getTime();
 
     if (numberOfTabs < 1 || !name || name.trim() === '') {
-      // name is empty or no tabs selected. better feedback and split this
+      this.setState({
+        open: true,
+        message: errorMsg
+      });
     } else {
       this.props.onSave(name, tabs, tsp, numberOfTabs);
     }
@@ -50,6 +67,7 @@ export default class AdditScreen extends React.Component {
         <Header onSave={this.onSave} onCancel={this.props.onCancel}/>
         <TabListContainer onSelectTab={this.onSelectTab} onUnselectTab={this.onUnselectTab} />
         <Footer onChangeCB={this.onNameChange} />
+        <Snackbar open={this.state.open} message={this.state.message} autoHideDuration={4000} onRequestClose={this.onSnackBarClose} />
       </div>
     );
   }

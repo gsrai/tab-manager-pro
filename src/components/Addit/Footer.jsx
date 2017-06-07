@@ -9,6 +9,7 @@ export default class Footer extends React.Component {
       <div id="groupName">
         <TextField hintText="Group Name"
                    fullWidth={true}
+                   maxLength="30"
                    onChange={this.props.onChangeCB} />
       </div>
     );
