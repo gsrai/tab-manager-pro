@@ -65,10 +65,15 @@ export default class GroupList extends React.Component {
     );
   }
 
+  setBadge(numberOfGroups) {
+    chrome.browserAction.setBadgeText({ text: numberOfGroups });
+  }
+
   render() {
     const groupModel = this.props.groupModel;
     let listComponents = groupModel.map((group, i) => this.createGroupComponent(group, i));
     listComponents = listComponents.reverse();
+    this.setBadge(String(listComponents.length));
 
     return (
       <div>
