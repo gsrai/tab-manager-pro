@@ -4,8 +4,11 @@ import AdditScreen from '../components/Addit/AdditScreen.jsx';
 import { GROUP_LIST_SCREEN } from '../helpers/screens';
 
 
-const mapStateToProps = () => {
-  return {};
+const mapStateToProps = (state) => {
+  const groupNames = state.groups.map((g) => g.name);
+  return {
+    groupNames
+  };
 };
 
 const mapDispatchToProps = dispatch => ({

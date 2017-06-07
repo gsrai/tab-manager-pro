@@ -1,11 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import AdditScreen from '../../../src/components/Addit/AdditScreen.jsx';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 function setup() {
 
   const props = {
+    groupNames: ['foo', 'bar'],
     onSave: function () {},
     onCancel: function () {}
   };
@@ -14,7 +14,7 @@ function setup() {
   spyOn(props, 'onCancel');
 
 
-  const enzymeWrapper = shallow(<MuiThemeProvider><AdditScreen {...props} /></MuiThemeProvider>);
+  const enzymeWrapper = shallow(<AdditScreen {...props} />);
 
   return {
     props,
@@ -26,7 +26,7 @@ describe('components', () => {
   describe('AdditScreen', () => {
     it('should render self and subcomponents', () => {
       const { enzymeWrapper } = setup();
-      expect(enzymeWrapper.find('AdditScreen').exists()).toBe(true);
+      expect(enzymeWrapper.exists()).toBe(true);
     });
   });
 });
