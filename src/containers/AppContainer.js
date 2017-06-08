@@ -3,7 +3,7 @@ import { initGroups } from '../redux/actions';
 import App from '../components/App.jsx';
 
 const mapStateToProps = state => ({
-  currentScreen: state.currentScreen
+  currentScreen: state.currentScreen.screen
 });
 
 const mapDispatchToProps = dispatch => ({

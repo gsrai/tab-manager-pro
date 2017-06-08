@@ -55,7 +55,7 @@ export default class GroupList extends React.Component {
         <ListItem rightIconButton={
                     this.createRightIconMenu(openTabs.bind(null, group),
                                         removeGroup.bind(null,group.id),
-                                        editGroup.bind(null,...group))
+                                        editGroup.bind(null, group.id))
                   }
                   primaryText={name}
                   secondaryText={this.createSecondaryText(tabText, dateText)}

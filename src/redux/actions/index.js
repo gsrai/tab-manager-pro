@@ -3,7 +3,7 @@ import { ADD_GROUP_SCREEN } from '../../helpers/screens';
 import {
   ADD_GROUP, EDIT_GROUP,
   DELETE_GROUP, LOAD_GROUPS,
-  LOAD_TABS, SET_SCREEN
+  LOAD_TABS, SET_SCREEN, SET_SCREEN_EDIT
 } from './actionTypes';
 
 // move to helper?
@@ -161,5 +161,13 @@ export function setScreen(screen) {
   return {
     type: SET_SCREEN,
     screen
+  };
+}
+
+export function setScreenEdit(screen, id) {
+  return {
+    type: SET_SCREEN_EDIT,
+    screen,
+    id
   };
 }

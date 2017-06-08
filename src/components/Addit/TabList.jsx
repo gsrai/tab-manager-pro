@@ -23,8 +23,10 @@ export default class TabList extends React.Component {
   }
 
   createCheckbox = (id) => {
+    const editing = this.props.editing ? true : false;
+
     return(
-      <Checkbox id={id} onCheck={this.onCheck} />
+      <Checkbox id={id} onCheck={this.onCheck} defaultChecked={editing} />
     );
   }
 
@@ -64,5 +66,6 @@ TabList.propTypes = {
     url: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired
-  }))
+  })),
+  editing: PropTypes.bool
 };

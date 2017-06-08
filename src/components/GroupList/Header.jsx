@@ -13,7 +13,6 @@ export default class Header extends React.Component {
   }
 
   handleDrawerToggle = () => {
-    console.log('foo');
     this.setState({
       open: !this.state.open
     });
