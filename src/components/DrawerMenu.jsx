@@ -13,7 +13,7 @@ export default class DrawerMenu extends React.Component {
   }
 
   onDownloadJsonClick = () => {
-    chrome.storage.sync.get('tabManager', function (storageObj) {
+    chrome.storage.sync.get(null, function (storageObj) {
       const url = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(storageObj));
       chrome.downloads.download({
         url,
@@ -32,15 +32,10 @@ export default class DrawerMenu extends React.Component {
   };
 
   uploadDialogOnSubmit = (data) => {
-    const valid = data.tabManager && data.tabManager.tabGroups.length > 0;
-    if (valid) {
-      const groups = data['tabManager']['tabGroups'];
-      const obj = {};
-      obj['tabManager'] = { tabGroups: groups };
-
+    if (data) {
+      const groups = Object.keys(data).map((i) => data[i]);
       if (!groups) { return; }
-
-      chrome.storage.sync.set(obj, function () {});
+      chrome.storage.sync.set(data, function () {});
       this.handleCloseUploadDialog();
     } else {
       console.warn('uploaded json data is invalid');

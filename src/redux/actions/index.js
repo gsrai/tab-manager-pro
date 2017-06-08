@@ -1,4 +1,3 @@
-import sha256 from '../../helpers/crypto';
 import { ADD_GROUP_SCREEN } from '../../helpers/screens';
 import {
   ADD_GROUP, EDIT_GROUP,
@@ -7,34 +6,27 @@ import {
 } from './actionTypes';
 
 // move to helper?
-function readData(callback) {
-  chrome.storage.sync.get('tabManager', function (obj) {
-    callback(obj.tabManager);
+function readData(key, callback) {
+  chrome.storage.sync.get(key, function (obj) {
+    callback(obj);
   });
 }
 
-function writeData(data) {
+// can only overwrite one item, not all
+function writeData(key, data) {
   const obj = {};
-  obj['tabManager'] = data;
+  obj[key] = data;
 
-  if (!data) {
-    return;
-  }
+  if (!data) { return; }
 
   chrome.storage.sync.set(obj, function () {});
 }
 
+// load groups into the store
 export function initGroups() {
   return (dispatch) => {
-    readData(function (obj) {
-      let groups = null;
-      if (!obj || !obj.tabGroups) {
-        groups = [];
-        writeData({tabGroups: []});
-      } else {
-        groups = obj.tabGroups;
-      }
-
+    readData(null, function (obj) {
+      const groups = Object.keys(obj).map((i) => obj[i]);
       dispatch(loadGroups(groups));
     });
   };
@@ -47,58 +39,26 @@ export function loadGroups(groups) {
   };
 }
 
-function doesGroupExist(name, tabGroups) {
-  const numberOfGroups = tabGroups.length;
-
-  for (let i = 0; i < numberOfGroups; i++) {
-    if (tabGroups[i].name === name) {
-      return true;
-    }
-  }
-
-  return false;
-}
-
 export function addGroup(name, tabs, editTimestamp, numberOfTabs) {
   return (dispatch) => {
-    sha256(name).then((id) => {
-      const group = {id, name, tabs, editTimestamp, numberOfTabs};
-      readData(function (data) {
-        const tabGroups = data.tabGroups;
-
-        if (!doesGroupExist(group.name, tabGroups)) {
-          tabGroups.push(group);
-        } else {
-          // group already exists throw error or feedback
-        }
-
-        writeData({ tabGroups });
-      });
-
-      const addCallback = () => {
-        dispatch(createGroup(id, name, tabs, editTimestamp, numberOfTabs));
-        chrome.storage.onChanged.removeListener(addCallback);
-      };
-
-      chrome.storage.onChanged.addListener(addCallback);
-    });
+    const id = String(new Date().getTime());
+    const group = {id, name, tabs, editTimestamp, numberOfTabs};
+    writeData(id, group);
+    const addCallback = () => {
+      dispatch(createGroup(id, name, tabs, editTimestamp, numberOfTabs));
+      chrome.storage.onChanged.removeListener(addCallback);
+    };
+    chrome.storage.onChanged.addListener(addCallback);
   };
 }
 
 export function removeGroup(id) {
   return (dispatch) => {
-    readData(function (data) {
-      const _tabGroups = data.tabGroups;
-
-      const tabGroups = _tabGroups.filter((g) => g.id !== id);
-      writeData({ tabGroups });
-    });
-
+    chrome.storage.sync.remove(id);
     const deleteCallback = () => {
       dispatch(deleteGroup(id));
       chrome.storage.onChanged.removeListener(deleteCallback);
     };
-
     chrome.storage.onChanged.addListener(deleteCallback);
   };
 }
@@ -116,19 +76,17 @@ export function createGroup(id, name, tabs, editTimestamp, numberOfTabs) {
 
 export function editGroup(id, name, tabs, editTimestamp, numberOfTabs) {
   return (dispatch) => {
-    readData(function (data) {
-      const tabGroups = data.tabGroups;
-
-      const _group = tabGroups.filter((g) => g.id === id)[0];
-      const newGroups = tabGroups.filter((g) => g.id !== id);
-      const finalGroup = Object.assign({}, _group, {
-        name,
-        tabs,
-        editTimestamp,
-        numberOfTabs
-      });
-      newGroups.push(finalGroup);
-      writeData({ tabGroups: newGroups });
+    readData(id, function (data) {
+      const group = data[id];
+      if (group) {
+        const newGroup = Object.assign({}, group, {
+          name,
+          tabs,
+          editTimestamp,
+          numberOfTabs
+        });
+        writeData(id, newGroup);
+      }
     });
 
     const addCallback = () => {
