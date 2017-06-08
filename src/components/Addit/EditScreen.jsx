@@ -65,8 +65,6 @@ export default class EditScreen extends React.Component {
       errorMsg = 'Please select at least one tab';
     } else if (!name || name.trim() === '') {
       errorMsg = 'Please enter a group name';
-    } else if (this.doesGroupExist(name)) {
-      errorMsg = 'Group name is already taken';
     }
 
     if (errorMsg) {

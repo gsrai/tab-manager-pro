@@ -115,6 +115,32 @@ export function createGroup(id, name, tabs, editTimestamp, numberOfTabs) {
 }
 
 export function editGroup(id, name, tabs, editTimestamp, numberOfTabs) {
+  return (dispatch) => {
+    readData(function (data) {
+      const tabGroups = data.tabGroups;
+
+      const _group = tabGroups.filter((g) => g.id === id)[0];
+      const newGroups = tabGroups.filter((g) => g.id !== id);
+      const finalGroup = Object.assign({}, _group, {
+        name,
+        tabs,
+        editTimestamp,
+        numberOfTabs
+      });
+      newGroups.push(finalGroup);
+      writeData({ tabGroups: newGroups });
+    });
+
+    const addCallback = () => {
+      dispatch(editGroupInStore(id, name, tabs, editTimestamp, numberOfTabs));
+      chrome.storage.onChanged.removeListener(addCallback);
+    };
+
+    chrome.storage.onChanged.addListener(addCallback);
+  };
+}
+
+export function editGroupInStore(id, name, tabs, editTimestamp, numberOfTabs) {
   return {
     type: EDIT_GROUP,
     id,

@@ -8,14 +8,24 @@ export default class DrawerMenu extends React.Component {
     super(props);
   }
 
+  onDownloadJsonClick = () => {
+    chrome.storage.sync.get('tabManager', function (storageObj) {
+      const url = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(storageObj));
+      chrome.downloads.download({
+        url,
+        saveAs: true,
+        filename: 'tabManagerPro.json'
+      }, (id) => console.log(id));
+    });
+  }
+
   render() {
     return (
       <div id="drawerMenu">
         <Drawer open={this.props.open} docked={false} onRequestChange={this.props.toggle} >
-          <MenuItem>Download JSON</MenuItem>
+          <MenuItem onClick={this.onDownloadJsonClick} >Download JSON</MenuItem>
           <MenuItem>Upload JSON</MenuItem>
           <MenuItem>Archive (coming soon)</MenuItem>
-          <MenuItem>About</MenuItem>
         </Drawer>
       </div>
     );

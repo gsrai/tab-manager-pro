@@ -19,5 +19,5 @@
 		"default_title": "manage your tabs"
 	},
 
-	"permissions": ["tabs", "storage"]
+	"permissions": ["tabs", "storage", "downloads"]
 }
