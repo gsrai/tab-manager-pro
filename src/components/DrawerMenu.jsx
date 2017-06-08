@@ -2,10 +2,14 @@ import React from 'react';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import PropTypes from 'prop-types';
+import UploadDialog from './UploadDialog.jsx';
 
 export default class DrawerMenu extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      openUploadDialog: false,
+    };
   }
 
   onDownloadJsonClick = () => {
@@ -15,8 +19,21 @@ export default class DrawerMenu extends React.Component {
         url,
         saveAs: true,
         filename: 'tabManagerPro.json'
-      }, (id) => console.log(id));
+      }, () => {});
     });
+  }
+
+  handleOpenUploadDialog = () => {
+    this.setState({openUploadDialog: true});
+  };
+
+  handleCloseUploadDialog = () => {
+    this.setState({openUploadDialog: false});
+  };
+
+  uploadDialogOnSubmit = (data) => {
+    console.log(data);
+    this.handleCloseUploadDialog();
   }
 
   render() {
@@ -24,9 +41,12 @@ export default class DrawerMenu extends React.Component {
       <div id="drawerMenu">
         <Drawer open={this.props.open} docked={false} onRequestChange={this.props.toggle} >
           <MenuItem onClick={this.onDownloadJsonClick} >Download JSON</MenuItem>
-          <MenuItem>Upload JSON</MenuItem>
+          <MenuItem onClick={this.handleOpenUploadDialog} >Upload JSON</MenuItem>
           <MenuItem>Archive (coming soon)</MenuItem>
         </Drawer>
+        <UploadDialog open={this.state.openUploadDialog}
+                      onSubmit={this.uploadDialogOnSubmit}        
+                      handleClose={this.handleCloseUploadDialog} />
       </div>
     );
   }
