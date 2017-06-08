@@ -49,7 +49,7 @@ export default class AdditScreen extends React.Component {
 
   onSave = () => {
     const tabs = this.tabs;
-    const name = this.name;
+    const name = this.name.trim();
     const numberOfTabs = tabs.length;
     const tsp = new Date().getTime();
 

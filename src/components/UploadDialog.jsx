@@ -18,8 +18,7 @@ export default class UploadDialog extends React.Component {
 
     reader.onload = (e) => {
       const result = JSON.parse(e.target.result);
-      const formatted = JSON.stringify(result, null, 2);
-      this.props.onSubmit(formatted);
+      this.props.onSubmit(result);
     };
     reader.readAsText(files.item(0));
   }
@@ -40,12 +39,15 @@ export default class UploadDialog extends React.Component {
     ];
     return (
       <div id="UploadDialog">
-        <Dialog title="Upload JSON"
+        <Dialog title="Upload JSON (for nerds)"
                 actions={actions}
                 modal={false}
                 open={this.props.open}
                 onRequestClose={this.props.handleClose} >
           <input type="file" id="fileUpload" />
+          <br />
+          <span>Warning: this will wipe/corrupt all your groups if file is invalid,</span>
+          <span> this feature is for recovering backed up group data, use at your own risk.</span>
         </Dialog>
       </div>
     );

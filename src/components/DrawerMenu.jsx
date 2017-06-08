@@ -32,8 +32,20 @@ export default class DrawerMenu extends React.Component {
   };
 
   uploadDialogOnSubmit = (data) => {
-    console.log(data);
-    this.handleCloseUploadDialog();
+    const valid = data.tabManager && data.tabManager.tabGroups.length > 0;
+    if (valid) {
+      const groups = data['tabManager']['tabGroups'];
+      const obj = {};
+      obj['tabManager'] = { tabGroups: groups };
+
+      if (!groups) { return; }
+
+      chrome.storage.sync.set(obj, function () {});
+      this.handleCloseUploadDialog();
+    } else {
+      console.warn('uploaded json data is invalid');
+      console.log(data);
+    }
   }
 
   render() {
@@ -45,7 +57,7 @@ export default class DrawerMenu extends React.Component {
           <MenuItem>Archive (coming soon)</MenuItem>
         </Drawer>
         <UploadDialog open={this.state.openUploadDialog}
-                      onSubmit={this.uploadDialogOnSubmit}        
+                      onSubmit={this.uploadDialogOnSubmit}
                       handleClose={this.handleCloseUploadDialog} />
       </div>
     );

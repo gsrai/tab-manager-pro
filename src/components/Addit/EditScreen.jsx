@@ -54,7 +54,7 @@ export default class EditScreen extends React.Component {
 
   onSave = () => {
     const tabs = this.tabs;
-    const name = this.name;
+    const name = this.name.trim();
     const id = this.props.id;
     const numberOfTabs = tabs.length;
     const tsp = new Date().getTime();
