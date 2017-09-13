@@ -1,6 +1,8 @@
 # tab-manager-pro
 Chrome extension for managing tabs into groups for deferred consumption
 
+[Chrome Store Link](chrome.google.com/webstore/detail/tab-manager-pro/ebfpahimijhihjjnepkoojfpgpllbcdf)
+
 ### To Do ###
 - reload grouplist when backup json data is uploaded
 
