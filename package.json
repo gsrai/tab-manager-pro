@@ -3,7 +3,20 @@
   "private": true,
   "version": "1.0.0",
   "description": "A Chrome extension for managing tabs.",
+  "author": "Gagondeep Srai",
+  "license": "SEE LICENSE IN LICENSE.md",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gsrai/tab-manager-pro.git"
+  },
+  "keywords": [
+    "chrome",
+    "extension",
+    "tab",
+    "manager",
+    "pro"
+  ],
   "scripts": {
     "dev": "vite",
     "prebuild": "npm run lint && npm run fmt && vitest run",
@@ -44,5 +57,9 @@
     "typescript": "^4.9.3",
     "vite": "^4.1.0",
     "vitest": "^0.28.4"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/gsrai/tab-manager-pro/issues"
+  },
+  "homepage": "https://github.com/gsrai/tab-manager-pro#readme"
 }

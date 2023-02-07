@@ -1,32 +1,26 @@
-# Vite React Boilerplate
+# tab-manager-pro
 
-## Setup
+A Chrome extension for managing tabs into groups for deferred consumption.
 
-Create a project with vite via a cli prompt wizard: `npm create vite@latest`,
-or skip the wizard: `npm init vite@latest project-name --template react`.
+[Chrome Store Link](chrome.google.com/webstore/detail/tab-manager-pro/ebfpahimijhihjjnepkoojfpgpllbcdf)
 
-Then:
+## To Do
 
-```sh
-cd project-name
-npm i
-npm run dev
-# close the dev server
-git init
-git add .
-git commit -m "Initial Commit"
-```
+- reload grouplist when backup json data is uploaded
 
-## Dependencies
+#### Phase 2!
 
-`npm i -D vitest jsdom @testing-library/react @testing-library/jest-dom @testing-library/user-event`
-
-`npm i -D eslint prettier @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-import eslint-plugin-jsx-a11y eslint-config-prettier eslint-plugin-prettier prettier prettier-plugin-tailwindcss`
-
-`npm install -D tailwindcss postcss autoprefixer`
+- rewrite in modern react (2023)
+- create a testable, mockable wrapper around chrome extension api
+- archive deleted groups
+- badge should be a background task
+- better wrapper and separation from chrome.* namespace
+- edit should allow add
+- search tab filtering by name
+- better logo and icon in web store
+- tablist title of tab scrolls to show rest of title
+- max tabs per group is 50? provide feedback when creating group
 
 `npm i clsx`
-
-`npm i react-router-dom localforage match-sorter sort-by`
 
 `npm i @reduxjs/toolkit react-redux`
