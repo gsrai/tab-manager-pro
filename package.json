@@ -19,18 +19,22 @@
   ],
   "scripts": {
     "dev": "vite",
-    "prebuild": "npm run lint && npm run fmt && vitest run",
+    "prebuild": "npm run typecheck && npm run lint && npm run fmt && vitest run",
     "build": "vite build",
     "preview": "vite preview",
     "coverage": "vitest run --coverage",
-    "test": "vitest",
-    "lint": "tsc --noEmit && npx eslint 'src/**/*.{ts,tsx}'",
-    "fix": "npx eslint 'src/**/*.{ts,tsx}' --fix",
+    "test": "vitest --dir src",
+    "lint": "npx eslint 'src/**/*.{ts,tsx}'",
+    "lint:fix": "npx eslint 'src/**/*.{ts,tsx}' --fix",
+    "typecheck": "tsc --noEmit",
     "fmt": "prettier --check src/**/*.{ts,tsx}"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.2",
+    "clsx": "^1.2.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",

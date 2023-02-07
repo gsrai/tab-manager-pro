@@ -20,7 +20,3 @@ A Chrome extension for managing tabs into groups for deferred consumption.
 - better logo and icon in web store
 - tablist title of tab scrolls to show rest of title
 - max tabs per group is 50? provide feedback when creating group
-
-`npm i clsx`
-
-`npm i @reduxjs/toolkit react-redux`
